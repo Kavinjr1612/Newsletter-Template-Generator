@@ -1,0 +1,191 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Merriweather:wght@300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 99%;
+    --foreground: 0 0% 13%;
+
+    --card: 220 20% 97%;
+    --card-foreground: 0 0% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+
+    --primary: 235 65% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 235 65% 25%;
+
+    --muted: 220 10% 93%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 125 46% 33%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 200 15% 82%;
+    --input: 200 15% 82%;
+    --ring: 235 65% 30%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 220 20% 95%;
+    --sidebar-foreground: 235 50% 20%;
+    --sidebar-primary: 235 65% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 125 46% 33%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 200 15% 82%;
+    --sidebar-ring: 235 65% 30%;
+
+    --newspaper-cream: 220 20% 97%;
+    --newspaper-ink: 235 65% 30%;
+    --newspaper-rule: 200 15% 62%;
+    --newspaper-highlight: 125 46% 33%;
+  }
+
+  .dark {
+    --background: 235 30% 8%;
+    --foreground: 220 20% 90%;
+
+    --card: 235 25% 12%;
+    --card-foreground: 220 20% 90%;
+
+    --popover: 235 25% 12%;
+    --popover-foreground: 220 20% 90%;
+
+    --primary: 225 60% 65%;
+    --primary-foreground: 235 30% 8%;
+
+    --secondary: 235 20% 18%;
+    --secondary-foreground: 220 20% 90%;
+
+    --muted: 235 20% 18%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 125 40% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 235 15% 22%;
+    --input: 235 15% 22%;
+    --ring: 225 60% 65%;
+
+    --sidebar-background: 235 30% 10%;
+    --sidebar-foreground: 220 20% 88%;
+    --sidebar-primary: 225 60% 65%;
+    --sidebar-primary-foreground: 235 30% 8%;
+    --sidebar-accent: 125 40% 40%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 235 15% 22%;
+    --sidebar-ring: 225 60% 65%;
+
+    --newspaper-cream: 235 25% 12%;
+    --newspaper-ink: 225 60% 70%;
+    --newspaper-rule: 220 15% 30%;
+    --newspaper-highlight: 125 40% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-headline {
+    font-family: 'Merriweather', serif;
+  }
+  .font-body-serif {
+    font-family: 'Libre Baskerville', serif;
+  }
+  .font-display {
+    font-family: 'Cinzel Decorative', serif;
+  }
+  .drop-cap::first-letter {
+    @apply float-left text-7xl font-headline font-bold leading-none mr-2 mt-1;
+  }
+  /* PDF-safe drop cap: replaces float with inline styling that html2canvas can render */
+  .drop-cap-pdf::first-letter {
+    float: none !important;
+    font-size: 3rem !important;
+    margin-right: 0.15rem !important;
+    margin-top: 0 !important;
+    font-weight: bold;
+    line-height: 1;
+  }
+  /* Inline drop-cap span used during PDF capture (html2canvas can't render ::first-letter) */
+  .drop-cap-inline {
+    display: inline;
+    font-size: 3.5rem;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: baseline;
+    margin-right: 0.05rem;
+  }
+  .newspaper-rule {
+    border-top: 1px solid hsl(var(--newspaper-rule));
+  }
+  .newspaper-rule-thick {
+    border-top: 3px double hsl(var(--newspaper-rule));
+  }
+  .column-divider {
+    border-right: 1px solid hsl(var(--newspaper-rule));
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html, body {
+    background-color: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    width: 210mm;
+    height: 100%;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:shadow-none {
+    box-shadow: none !important;
+  }
+
+  .print\:ring-0 {
+    --tw-ring-shadow: 0 0 #0000 !important;
+    box-shadow: none !important;
+  }
+  
+  .print\:py-0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  .print\:px-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
