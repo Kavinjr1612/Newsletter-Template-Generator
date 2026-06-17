@@ -349,11 +349,14 @@ const Preview = () => {
     if (!layoutRef.current) return;
     try {
       setDownloading(true);
-      const html2canvas = (await import('html2canvas')).default;
+      const { toCanvas, getFontEmbedCSS } = await import('html-to-image');
       const { jsPDF } = await import('jspdf');
       
       // Ensure fonts are ready
       if (document.fonts) await document.fonts.ready;
+
+      // OPTIMIZATION: Extract font CSS once to prevent re-fetching for every page
+      const fontEmbedCSS = await getFontEmbedCSS(layoutRef.current as HTMLElement);
       
       const pages = layoutRef.current.querySelectorAll('.a4-page');
       const pdf = new jsPDF('p', 'mm', 'a4', true);
@@ -363,47 +366,67 @@ const Preview = () => {
       if (oldCleanRoom) oldCleanRoom.remove();
 
       // NEW: "Clean Capture" mechanism
-      // We create a hidden container at 1:1 scale to capture pages perfectly.
-      // This avoids issues with scale transforms and layout shifts.
       const cleanRoom = document.createElement('div');
       cleanRoom.id = 'pdf-clean-room';
       cleanRoom.style.position = 'fixed';
       cleanRoom.style.top = '-10000px';
       cleanRoom.style.left = '-10000px';
-      cleanRoom.style.width = '794px'; // Standard A4 at 96 DPI
+      cleanRoom.style.width = '794px'; 
       document.body.appendChild(cleanRoom);
 
-      for (let i = 0; i < pages.length; i++) {
-        const sourcePage = pages[i] as HTMLElement;
-        const pageClone = sourcePage.cloneNode(true) as HTMLElement;
-        
-        // Remove scale and other UI-only transforms
-        pageClone.style.transform = 'none';
-        pageClone.style.boxShadow = 'none';
-        pageClone.style.margin = '0';
-        pageClone.style.border = 'none';
-        
-        cleanRoom.appendChild(pageClone);
-        
-        const canvas = await html2canvas(pageClone, {
-          scale: 2, // Retain high resolution
-          useCORS: true,
-          backgroundColor: '#ffffff',
-          logging: false,
-          width: 794,
-          height: 1123,
-          onclone: (doc) => {
-            // Further capture optimization
-          }
+      const BATCH_SIZE = 3;
+      const imageData = new Array(pages.length);
+
+      for (let i = 0; i < pages.length; i += BATCH_SIZE) {
+        const batchLimit = Math.min(i + BATCH_SIZE, pages.length);
+        const batchPromises = [];
+
+        for (let j = i; j < batchLimit; j++) {
+          const sourcePage = pages[j] as HTMLElement;
+          const pageClone = sourcePage.cloneNode(true) as HTMLElement;
+          
+          pageClone.style.transform = 'none';
+          pageClone.style.boxShadow = 'none';
+          pageClone.style.margin = '0';
+          pageClone.style.border = 'none';
+          pageClone.style.width = '794px';
+          pageClone.style.height = '1123px';
+          pageClone.querySelectorAll('[data-html2canvas-ignore]').forEach(el => el.remove());
+          
+          cleanRoom.appendChild(pageClone);
+
+          batchPromises.push((async (index, clone) => {
+            try {
+              // OPTIMIZATION: Use toCanvas and reuse fontEmbedCSS
+              const canvas = await toCanvas(clone, {
+                pixelRatio: 1.5,
+                backgroundColor: '#ffffff',
+                width: 794,
+                height: 1123,
+                fontEmbedCSS, // Critical optimization
+              });
+              
+              // OPTIMIZATION: Use JPEG instead of PNG for faster processing
+              const img = canvas.toDataURL('image/jpeg', 0.85);
+              clone.remove();
+              return { index, img };
+            } catch (err) {
+              clone.remove();
+              throw err;
+            }
+          })(j, pageClone));
+        }
+
+        const results = await Promise.all(batchPromises);
+        results.forEach(res => {
+          imageData[res.index] = res.img;
         });
-        
-        const imgData = canvas.toDataURL('image/png', 1.0);
-        
+      }
+
+      for (let i = 0; i < imageData.length; i++) {
         if (i > 0) pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
-        
-        // Remove clone to save memory
-        pageClone.remove();
+        // Use JPEG format in PDF for smaller size and faster loading
+        pdf.addImage(imageData[i], 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
       }
       
       pdf.save(`${edition.name || 'newsletter'}.pdf`);

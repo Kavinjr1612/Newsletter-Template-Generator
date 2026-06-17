@@ -385,7 +385,7 @@ const EditorialTeamPage = ({ edition, pageNumber }: PageProps) => {
            <div className="w-full max-w-2xl px-12 pt-12 border-t border-slate-50 flex flex-wrap justify-center gap-12">
               {et?.members?.map((m, i) => (
                 <div key={i} className="flex flex-col items-center gap-2">
-                   <div className="w-14 h-14 rounded-full border border-slate-100 overflow-hidden grayscale opacity-40">
+                   <div className="w-14 h-14 rounded-full` border border-slate-100 overflow-hidden grayscale opacity-40">
                       {m.photoUrl && <img src={m.photoUrl} alt={m.name} className="w-full h-full object-cover" />}
                    </div>
                    <Typography.Caption data-section-key={`editorial-member-${i}`} data-use-native-layout="true" className="text-center" style={{ ...custom, color: custom.color }}>{m.name}</Typography.Caption>

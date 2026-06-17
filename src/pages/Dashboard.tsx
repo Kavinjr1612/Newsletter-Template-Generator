@@ -126,7 +126,7 @@ const Dashboard = () => {
                 <div className="space-y-2">
                   <Label>Department Name</Label>
                   <Input
-                    placeholder="e.g. Computer Science Department"
+                    placeholder="e.g. Department of Computer Applications"
                     value={deptName}
                     onChange={(e) => setDeptName(e.target.value)}
                   />

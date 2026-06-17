@@ -74,7 +74,7 @@ const PublicationsForm = ({ edition, onUpdate }: Props) => {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label>Dept</Label>
-              <Input value={form.dept} onChange={(e) => setForm({ ...form, dept: e.target.value })} placeholder="e.g. CSE" />
+              <Input value={form.dept} onChange={(e) => setForm({ ...form, dept: e.target.value })} placeholder="e.g. MCA" />
             </div>
             <div className="space-y-2">
               <Label>Claiming Author</Label>

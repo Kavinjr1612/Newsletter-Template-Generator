@@ -1,7 +1,7 @@
 import { Edition, createEdition } from '@/types/newspaper';
 
 export function createSampleEdition(): Edition {
-  const edition = createEdition('KEC Chronicle — Spring 2026', 'Department of Computer Science and Engineering');
+  const edition = createEdition('KEC Chronicle — Spring 2026', 'Department of Computer Applications');
 
   edition.editionNumber = 7;
   edition.tagline = 'Innovate · Inspire · Impact';
@@ -15,10 +15,10 @@ export function createSampleEdition(): Edition {
   edition.visionMission = {
     institutionVision: 'To be a globally recognized institution of excellence in engineering education and research, fostering innovation and producing industry-ready graduates who contribute meaningfully to society.',
     institutionMission: 'To provide quality technical education through state-of-the-art infrastructure, experienced faculty, and industry collaboration. To nurture creativity, ethical values, and leadership among students while promoting research that addresses real-world challenges.',
-    deptVision: 'To be a center of excellence in Computer Science and Engineering, producing skilled professionals who drive technological innovation and digital transformation across industries.',
-    deptMission: 'To impart quality education in computer science fundamentals and emerging technologies. To foster a research-oriented environment and develop professionals with strong ethical values, communication skills, and a commitment to lifelong learning.',
+    deptVision: 'To be a center of excellence in Computer Applications, producing skilled professionals who drive technological innovation and digital transformation across industries.',
+    deptMission: 'To impart quality education in Computer Applications fundamentals and emerging technologies. To foster a research-oriented environment and develop professionals with strong ethical values, communication skills, and a commitment to lifelong learning.',
     programOutcomes: [
-      'Engineering Knowledge: Apply knowledge of mathematics, science, engineering fundamentals, and Computer Science specialization to solve complex engineering problems.',
+      'Engineering Knowledge: Apply knowledge of mathematics, science, engineering fundamentals, and Computer Applications specialization to solve complex engineering problems.',
       'Problem Analysis: Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions.',
       'Design & Development: Design solutions for complex engineering problems and design system components or processes that meet specified needs with consideration for public health, safety, and environment.',
       'Conduct Investigations: Use research-based knowledge and methods including design of experiments, analysis and interpretation of data to provide valid conclusions.',
@@ -32,7 +32,7 @@ export function createSampleEdition(): Edition {
       'Life-long Learning: Recognize the need for and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change.',
     ],
     peos: [
-      'PEO 1: Graduates will have successful careers in industry, academia, government, or entrepreneurial pursuits in the field of Computer Science and Engineering.',
+      'PEO 1: Graduates will have successful careers in industry, academia, government, or entrepreneurial pursuits in the field of Computer Applications.',
       'PEO 2: Graduates will engage in lifelong learning and professional development to adapt to evolving technologies and contribute to the advancement of their profession.',
       'PEO 3: Graduates will demonstrate leadership, teamwork, and effective communication skills in their professional careers while upholding ethical standards.',
     ],
@@ -46,7 +46,7 @@ export function createSampleEdition(): Edition {
 
   edition.hodMessage = {
     name: 'Dr. S. Ramesh Kumar',
-    title: 'Head of Department – CSE',
+    title: 'Head of Department – MCA',
     photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
     message: 'It gives me immense pleasure to present the seventh edition of our department newsletter. This edition showcases the remarkable achievements of our students and faculty in academics, research, and extracurricular activities. Our department continues to grow in reputation and excellence, with significant contributions to cutting-edge research in AI, cybersecurity, and cloud computing. I congratulate the editorial team for their tireless efforts in bringing this edition to life.',
   };
@@ -55,12 +55,12 @@ export function createSampleEdition(): Edition {
     name: 'Dr. Priya Dharshini',
     title: 'Associate Professor & Newsletter Coordinator',
     photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face',
-    message: 'The CSE department has achieved new milestones this semester with 15 research papers published in Scopus-indexed journals, 3 patents filed, and multiple national-level hackathon victories. Our students have secured internships at top tech companies and our placement record continues to be outstanding. This newsletter captures the spirit of innovation that defines our department.',
+    message: 'The MCA department has achieved new milestones this semester with 15 research papers published in Scopus-indexed journals, 3 patents filed, and multiple national-level hackathon victories. Our students have secured internships at top tech companies and our placement record continues to be outstanding. This newsletter captures the spirit of innovation that defines our department.',
   };
 
   edition.studentMessage = {
     name: 'Arun Vijay K.',
-    title: 'Student Editor – Final Year CSE',
+    title: 'Student Editor – Final Year MCA',
     photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face',
     message: 'Being part of the editorial team has been a wonderful journey. This edition brings you stories of inspiration — from our seniors who cracked dream placements to juniors who built award-winning projects. We have also featured faculty research highlights and campus life snapshots. I hope this newsletter motivates every student to dream big and work hard.',
   };
@@ -69,7 +69,7 @@ export function createSampleEdition(): Edition {
     {
       id: crypto.randomUUID(),
       title: 'AI-Powered Smart Campus: Students Build IoT Monitoring System',
-      author: 'Kavitha S., III Year CSE',
+      author: 'Kavitha S., III Year MCA',
       category: 'research',
       body: 'A team of third-year students has developed an innovative IoT-based smart campus monitoring system that uses AI to optimize energy consumption across college buildings. The system employs TensorFlow Lite models on Raspberry Pi devices to predict occupancy patterns and automatically adjust lighting and HVAC systems. The project, which won first place at the National Innovation Challenge held at IIT Madras, has reduced energy consumption by 23% in the pilot wing. The team plans to expand the system to cover the entire campus by next semester, with integration into the college ERP system for centralized monitoring.',
       imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
@@ -93,9 +93,9 @@ export function createSampleEdition(): Edition {
     {
       id: crypto.randomUUID(),
       title: 'Students Win National Cybersecurity Hackathon',
-      author: 'Deepak R., IV Year CSE',
+      author: 'Deepak R., IV Year MCA',
       category: 'achievements',
-      body: 'A team of four CSE students secured first place at the CyberShield 2026 national hackathon organized by NASSCOM, competing against 200+ teams from premier institutions. Their solution involved a real-time threat detection system using federated learning, which impressed the judges with its novel approach to privacy-preserving security analytics. The team received a cash prize of ₹2,00,000 and internship offers from leading cybersecurity firms.',
+      body: 'A team of four MCA students secured first place at the CyberShield 2026 national hackathon organized by NASSCOM, competing against 200+ teams from premier institutions. Their solution involved a real-time threat detection system using federated learning, which impressed the judges with its novel approach to privacy-preserving security analytics. The team received a cash prize of ₹2,00,000 and internship offers from leading cybersecurity firms.',
       imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop',
       sourceUrl: '',
       priority: 'feature',
@@ -141,21 +141,21 @@ export function createSampleEdition(): Edition {
   edition.publications = [
     {
       id: crypto.randomUUID(),
-      dept: 'CSE',
+      dept: 'MCA',
       paperDetails: 'Deep Learning-Based Anomaly Detection in Network Traffic Using Transformer Architecture — Published in IEEE Transactions on Neural Networks, Vol. 37, 2026',
       claimingAuthor: 'Dr. S. Ramesh Kumar & Kavitha S.',
       indexing: 'SCI / Scopus',
     },
     {
       id: crypto.randomUUID(),
-      dept: 'CSE',
+      dept: 'MCA',
       paperDetails: 'A Novel Approach to Federated Learning for Privacy-Preserving Healthcare Data Analysis — Springer LNCS, 2026',
       claimingAuthor: 'Dr. Priya Dharshini & Deepak R.',
       indexing: 'Scopus',
     },
     {
       id: crypto.randomUUID(),
-      dept: 'CSE',
+      dept: 'MCA',
       paperDetails: 'Optimizing Cloud Resource Allocation Using Multi-Objective Genetic Algorithms — Elsevier Journal of Cloud Computing, 2025',
       claimingAuthor: 'Dr. M. Karthikeyan',
       indexing: 'SCI',
